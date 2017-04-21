@@ -33,8 +33,9 @@ public class StoreController {
 
 		logger.info(list);
 		model.addAttribute("list", list);
-		model.addAttribute("pageMaker",new PageMaker(cri,123));	
+		model.addAttribute("pageMaker",new PageMaker(cri,service.getCount(cri)));	
+		
 		}
-	
+
 	
 } 

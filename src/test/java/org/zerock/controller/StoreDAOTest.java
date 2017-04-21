@@ -38,7 +38,13 @@ public class StoreDAOTest {
 	
 	@Test
 	public void testList(){
-		dao.list(new Criteria().settingPage(2).settingSize(5))
+		Criteria cri = new Criteria();
+		cri.setType("c");
+		cri.setKeyword("33");
+		
+		dao.list(cri
+//				new Criteria().settingPage(2).settingSize(5)
+				)
 		.forEach(store->logger.info(store));
 	}
 	

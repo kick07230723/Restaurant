@@ -14,8 +14,64 @@
 		 values(#{sname},#{lat},#{lng},#{info})
   	</insert>
   	
+  	<sql id="search">
+  		<if test="keyword !=null"> 
+		  	<choose>
+			  	<when test='type=="n"'>
+			  		and sname like concat('%', #{keyword}, '%')	
+			  	</when>
+			  	
+			  	<when test='type=="c"'>
+			  		and info like concat('%', #{keyword}, '%')	
+			  	</when>
+			  	
+			  	<when test='type=="nc"'>
+			  		and 
+			  		(sname like concat('%', #{keyword}, '%')	
+			  		or info like concat('%', #{keyword}, '%')	)
+			  	</when>
+			  	
+			  	<otherwise>
+			  	
+		    	</otherwise>	  	
+		  	</choose>	  	
+	  	</if>
+  	</sql>
+  	
   	<select id="list" parameterType="org.zerock.domain.Criteria" resultType="org.zerock.domain.StoreVO">
-  	select * from tbl_store
-  	where sno > 0 order by sno desc limit #{skip},#{amount}
+	  	select * from tbl_store
+	  	where sno > 0 
+	  	<include refid="search"></include>
+	  	
+	  	order by sno desc limit #{skip},#{amount}
   	</select>
+  	
+  	<select id="view" parameterType="int" resultType="org.zerock.domain.StoreVO">
+	  	select * from tbl_store	where sno = #{sno} 
+	  	<include refid="search"></include>
+	  	
+	  	order by sno desc limit #{skip},#{amount}
+  	</select>
+  	
+  	<select id="listCount" parameterType="org.zerock.domain.Criteria" resultType="int">
+	  	 	select count(sno) from tbl_store
+	  		where sno > 0 
+	  		
+	  		<include refid="search"></include>
+
+  	</select>
+<!-- 
+        <select id="listTypes" parameterType="org.zerock.domain.Criteria"
+        resultType="org.zerock.domain.StoreVO">
+        select * from tbl_store
+        
+        ${sql}
+       
+        #{sql}
+        
+        where sno>0
+   
+        
+    </select> -->
+
 </mapper>

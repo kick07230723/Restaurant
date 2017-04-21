@@ -16,5 +16,7 @@ public interface StoreService {
 	
 	public List<StoreVO> getList(Criteria cri) throws Exception;
 	
+	public int getCount(Criteria cri)throws Exception;
+	
 
 }
