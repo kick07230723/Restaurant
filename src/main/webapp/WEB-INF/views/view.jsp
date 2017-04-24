@@ -30,11 +30,11 @@
 
 <script>
 $(document).ready(function(){
-	var obj= {
-			 reText:$("#reText").val(),
-			 replyer:$("#replyer").val()	 
-	 };
     $("#modBtn").click(function(e){
+				var obj= {
+						 reText:$("#reText").val(),
+						 replyer:$("#replyer").val()	 
+				 };
         
         $.ajax({
             type:'post',
