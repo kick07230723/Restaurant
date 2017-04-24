@@ -30,7 +30,10 @@
 
 <script>
 $(document).ready(function(){
-	
+	var obj= {
+			 reText:$("#reText").val(),
+			 replyer:$("#replyer").val()	 
+	 };
     $("#modBtn").click(function(e){
         
         $.ajax({
@@ -39,6 +42,7 @@ $(document).ready(function(){
             headers: { 
                      "Content-Type": "application/json",
                       "X-HTTP-Method-Override": "PUT" },
+                      data: JSON.stringify(obj),
             success:function(msg){
                 console.log(msg)
                 
